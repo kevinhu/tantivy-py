@@ -680,7 +680,8 @@ class TestDocument(object):
         orig.add_float("float", 1.0)
         orig.add_date("birth", datetime.datetime(2019, 8, 12, 13, 0, 5))
         orig.add_text("title", "hello world!")
-        orig.add_json("json", '{"a": 1, "b": 2}')
+        # note that pythonize will convert positive i64s to u64s, which we don't test here: https://github.com/quickwit-oss/tantivy-py/pull/401#issuecomment-2577733829
+        orig.add_json("json", '{"a": 1.0, "b": -2}')
         orig.add_bytes("bytes", b"abc")
 
         facet = tantivy.Facet.from_string("/europe/france")
